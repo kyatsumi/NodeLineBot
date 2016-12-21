@@ -4,7 +4,11 @@
 
 //モジュールのインポート
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
+
+//ミドルウェア設定
+app.use(bodyParser.json());
 
 //Webサーバー設定
 var port = (process.env.PORT || 3000);
@@ -23,3 +27,5 @@ app.post('/callback', function(req, res, next) {
     res.status(200).end();
     console.log(req.body);
 });
+
+
