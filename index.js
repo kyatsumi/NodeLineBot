@@ -25,7 +25,10 @@ app.get('/', function(req, res, next) {
 //POST
 app.post('/callback', function(req, res, next) {
     res.status(200).end();
-    console.log(req.body);
+    for (var event of req.body.events) {
+        if (event.type == 'message') {
+            console.log(event.type + ' ' + event.message);
+        }
+    }
 });
-
 
