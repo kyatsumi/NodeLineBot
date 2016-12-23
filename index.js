@@ -31,12 +31,10 @@ var server = app.listen(port, function() {
 });
 
 //ルーターの設定
-//GET
 app.get('/', function(req, res, next) {
    res.send('Node is running on port ' + port);
 });
 
-//POST
 app.post('/callback', function(req, res, next) {
     res.status(200).end();
     if (!signatureValidation(req.headers['x-line-signature'], req.body)) {
@@ -67,7 +65,7 @@ app.post('/callback', function(req, res, next) {
                                     longitude: '136.882874'
                                 }]
                             };
-                            reply.replyTextMessage(body);
+                            reply.replyMessage(body);
                             break;
                         default:
                             var body = {
@@ -77,11 +75,10 @@ app.post('/callback', function(req, res, next) {
                                     text: event.message.text
                                 }]
                             };
-                            reply.replyTextMessage(body);
+                            reply.replyMessage(body);
                             break;
-}
+                }
             });
-
         }
     }
 });

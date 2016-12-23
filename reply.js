@@ -15,7 +15,7 @@ const LINE_REQUEST_HEADERS = {
 var request = require('request');
 
 module.exports = class reply {
-    static replyTextMessage(body) {
+    static replyMessage(body) {
             request({
                 url: LINE_REQUEST_POST,
                 method: 'POST',
