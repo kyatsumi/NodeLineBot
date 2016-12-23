@@ -1,0 +1,10 @@
+{
+"replyToken" : "",
+"messages": [{
+    "type": "location",
+    "title": "架空のお店です",
+    "address": "名古屋駅のそのへん",
+    "latitude": "35.170983",
+    "longitude": "136.882874"
+}]
+}
