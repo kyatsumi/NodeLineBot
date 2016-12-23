@@ -37,11 +37,10 @@ app.get('/', function(req, res, next) {
 //POST
 app.post('/callback', function(req, res, next) {
     res.status(200).end();
-    if (signatureValidation(req.headers['x-line-signature'], req.body)) {
-        console.log('シグネチャの検証結果:OK');
-    } else {
+    if (!signatureValidation(req.headers['x-line-signature'], req.body)) {
         console.log('シグネチャの検証結果:NG');
-    }
+        return;
+    } 
     for (var event of req.body.events) {
         if (event.type == 'message') {
             var body = {
