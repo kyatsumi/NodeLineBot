@@ -5,7 +5,7 @@
 var fs = require('fs');
 
 var bodyFactory = function(action, replyToken) {
-    var body = JSON.parse(fs.readFileSync('./reply_json/' + action, 'utf8'));
+    var body = JSON.parse(fs.readFileSync('./reply_json/' + action + '.json', 'utf8'));
     body['replyToken'] = replyToken;
     return body;
 };
