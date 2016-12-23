@@ -16,7 +16,6 @@ const LINE_REQUEST_HEADERS = {
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
-var crypto = require('crypto');
 var signatureValidation = require('./signatureValidation');
 var app = express();
 
@@ -38,7 +37,7 @@ app.get('/', function(req, res, next) {
 //POST
 app.post('/callback', function(req, res, next) {
     res.status(200).end();
-    if (signatureValidation(req.headers['x-line-signature'], req.body ,crypto)) {
+    if (signatureValidation(req.headers['x-line-signature'], req.body)) {
         console.log('シグネチャの検証結果:OK');
     } else {
         console.log('シグネチャの検証結果:NG');
