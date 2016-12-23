@@ -20,7 +20,7 @@ var app = express();
 
 //ミドルウェア設定
 app.use(bodyParser.json());
-Promise.confi({
+Promise.config({
     cancellation: true
 });
 
