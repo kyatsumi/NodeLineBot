@@ -38,7 +38,7 @@ app.post('/callback', function(req, res, next) {
     } 
     for (var event of req.body.events) {
         if (event.type == 'message' && event.message.text) {
-            var analysisResult = new Promise(aiExecuterFactory.apiai());
+            var analysisResult = new Promise(aiExecuterFactory.apiai(event.message.text));
             analysisResult.then(function(aiResponse) {
                 console.log(aiResponse.result.action);
                 var body = bodyFactory.apiaiBody(aiResponse.result.action, event.replyToken);
