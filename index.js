@@ -46,7 +46,8 @@ app.post('/callback', function(req, res, next) {
                     reply.replyMessage(body);
                 });
                 break;
-            case '' :
+            default:
+                //message以外は未実装
                 break;
         }
     }

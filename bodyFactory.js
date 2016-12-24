@@ -12,7 +12,7 @@ module.exports.getBody = function(type, action, replyToken) {
             return postBackBody(action, replyToken);
         default:
             return messageBody('empty', replyToken);
-        };
+    };
 };
 
 var messageBody = function(action, replyToken) {
