@@ -13,7 +13,7 @@ var uuid = require('node-uuid');
 //event.type == 'message'の場合のPromise用のExecuterを生成
 module.exports.aiExecuterByMessage = function(message) {
     switch(message.type) {
-        case 'text' :
+        case 'text':
             var aiInstance = apiai(APIAI_CLIENT_ACCESS_TOKEN);
             var aiRequest = aiInstance.textRequest(message.text, {sessionId: uuid.v1()});
             var apiaiExecutor = function(resolve, reject) {
@@ -23,9 +23,9 @@ module.exports.aiExecuterByMessage = function(message) {
                 aiRequest.end();
             };
             return apiaiExecutor;
-        default :
+        default:
             var executor = function(resolve, reject) {
-                resolve('');
+                resolve('empty');
             };
             return executor;
     }
