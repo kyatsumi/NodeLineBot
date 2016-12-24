@@ -1,5 +1,5 @@
 
-/* Heroku環境からAIP.aiアクセストークンを取得 */
+/* 環境からAIP.aiアクセストークンを取得 */
 const APIAI_CLIENT_ACCESS_TOKEN = process.env.APIAI_CLIENT_ACCESS_TOKEN;
 
 //AIP.ai用のSDK
@@ -9,8 +9,12 @@ var uuid = require('node-uuid');
 
 /**
  * Promise用のExecuterを生成
- * message.type == 'text'以外の場合はAIを実行しない
- * Excuter実行後のレスポンスとしてAIのインテントに登録してある文字列を返す
+ * Excuter実行後のレスポンスとしてAIに登録してある文字列を返す
+ * "お店に行きたい"と同じ意味の言葉はshopLocationという単語に変換されるように登録してある。
+ * 例：お店に行きたい　→　shopLocation
+ * 　　お店の地図　　　→　shopLocation
+ * 　　みせの場所　　　→　shopLocation
+ *     メニュー       →  undefined
  * @param {type} message 
  * @returns {nm$_aiExecuterFactory.module.exports.aiExecuterByMessage.apiaiExecutor|nm$_aiExecuterFactory.module.exports.aiExecuterByMessage.executor} レスポンスとして文字列を返す
  */

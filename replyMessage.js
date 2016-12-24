@@ -2,7 +2,7 @@
  * リプライ用クラス
  */
 
-/* Heroku環境からラインアクセストークンを取得 */
+/* 環境からラインアクセストークンを取得 */
 const LINE_CHANNEL_ACCESS_TOKEN = process.env.LINE_CHANNEL_ACCESS_TOKEN;
 /* ラインのリプライ用URL*/
 const LINE_REQUEST_POST = 'https://api.line.me/v2/bot/message/reply';
