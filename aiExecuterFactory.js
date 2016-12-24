@@ -12,8 +12,9 @@ var uuid = require('node-uuid');
 
 /**
  * event.type == 'message'の場合のPromise用のExecuterを生成
+ * message.type == 'text'以外の場合はAIを実行しない
  * Excuter実行後のレスポンスとして文字列を返す
- * @param {type} message
+ * @param {type} message 
  * @returns {nm$_aiExecuterFactory.module.exports.aiExecuterByMessage.apiaiExecutor|nm$_aiExecuterFactory.module.exports.aiExecuterByMessage.executor} 生成されたExecuterはPromiseで使用してもエラーが発生しない
  */
 module.exports.aiExecuterByMessage = function(message) {
