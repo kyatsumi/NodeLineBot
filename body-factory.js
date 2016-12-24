@@ -23,13 +23,13 @@ module.exports.getBody = function(eventType, action, replyToken) {
 };
 
 var messageBody = function(action, replyToken) {
-    var body = JSON.parse(fs.readFileSync('./reply_json/message/' + action + '.json', 'utf8'));
+    var body = JSON.parse(fs.readFileSync('./reply-json/message/' + action + '.json', 'utf8'));
     body['replyToken'] = replyToken;
     return body;
 };
 
 var postBackBody = function(action,replyToken) {
-    var body = JSON.parse(fs.readFileSync('./reply_json/postback/' + action + '.json', 'utf8'));
+    var body = JSON.parse(fs.readFileSync('./reply-json/postback/' + action + '.json', 'utf8'));
     body['replyToken'] = replyToken;
     return body;
 };
