@@ -2,19 +2,15 @@
  * Line Message APIのWebhookを受ける
  */
 
-/* Heroku環境からAIP.aiアクセストークンを取得 */
-const APIAI_CLIENT_ACCESS_TOKEN = process.env.APIAI_CLIENT_ACCESS_TOKEN;
-
 
 //モジュールのインポート
 var express = require('express');
 var bodyParser = require('body-parser');
-var apiai = require('apiai');
-var uuid = require('node-uuid');
 var Promise = require('bluebird');
 var signatureValidation = require('./signatureValidation');
-var reply = require('./reply');
+var replyMessage = require('./replyMessage');
 var bodyFactory = require('./bodyFactory');
+var aiExecuterFactory = require('./aiExecuterFactory');
 var app = express();
 
 //ミドルウェア設定
@@ -41,20 +37,18 @@ app.post('/callback', function(req, res, next) {
         return;
     } 
     for (var event of req.body.events) {
-        if (event.type == 'message' && event.message.text) {
-            var aiInstance = apiai(APIAI_CLIENT_ACCESS_TOKEN);
-            var aiRequest = aiInstance.textRequest(event.message.text, {sessionId: uuid.v1()});
-            var getIntent = new Promise(function(resolve, reject){
-                aiRequest.on('response', function(response){
-                    resolve(response);
+        switch(event.type) {
+            case 'message' :
+                var analysisResult = new Promise(aiExecuterFactory.aiExecuterByMessage(event.message));
+                analysisResult.then(function(aiResponse) {
+                    console.log(aiResponse);
+                    var body = bodyFactory.getBody(event.type, aiResponse, event.replyToken);
+                    replyMessage(body);
                 });
-                aiRequest.end();
-            });
-            getIntent.then(function(aiResponse) {
-                console.log(aiResponse.result.action);
-                var body = bodyFactory(aiResponse.result.action, event.replyToken);
-                reply.replyMessage(body);
-            });
+                break;
+            default:
+                //message以外は未実装
+                break;
         }
     }
 });

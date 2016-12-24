@@ -14,8 +14,12 @@ const LINE_REQUEST_HEADERS = {
 
 var request = require('request');
 
-module.exports = class reply {
-    static replyMessage(body) {
+/**
+ * ラインへリプライを送信する
+ * @param {type} body 送信する内容(json形式）
+ * @returns {undefined}
+ */
+module.exports = function(body) {
             request({
                 url: LINE_REQUEST_POST,
                 method: 'POST',
@@ -23,6 +27,4 @@ module.exports = class reply {
                 body: body,
                 json: true
             });
-    }
-
 };

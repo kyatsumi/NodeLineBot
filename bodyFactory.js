@@ -1,13 +1,35 @@
 /* 
- * ラインリプライ用ボディーを取得
+ * このファイル内にある関数の戻り値は必ずLineMessageAPIのbodyの仕様にそった内容を返すこと
  */
 
 var fs = require('fs');
 
-var bodyFactory = function(action, replyToken) {
-    var body = JSON.parse(fs.readFileSync('./reply_json/' + action + '.json', 'utf8'));
+/**
+ * {@code action}をファイル名としてreply_jsonフォルダ内部を検索する
+ * @param {type} type 
+ * @param {type} action 
+ * @param {type} replyToken 
+ * @returns {Array|Object|messageBody.body|nm$_bodyFactory.messageBody.body|postBackBody.body|nm$_bodyFactory.postBackBody.body} 
+ */
+module.exports.getBody = function(type, action, replyToken) {
+    switch(type) {
+        case 'message':
+            return messageBody(action, replyToken);
+        case 'postback':
+            return postBackBody(action, replyToken);
+        default:
+            return messageBody('empty', replyToken);
+    };
+};
+
+var messageBody = function(action, replyToken) {
+    var body = JSON.parse(fs.readFileSync('./reply_json/message/' + action + '.json', 'utf8'));
     body['replyToken'] = replyToken;
     return body;
 };
 
-module.exports = bodyFactory;
+var postBackBody = function(action,replyToken) {
+    var body = JSON.parse(fs.readFileSync('./reply_json/postback/' + action + '.json', 'utf8'));
+    body['replyToken'] = replyToken;
+    return body;
+};
