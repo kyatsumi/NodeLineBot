@@ -8,7 +8,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var Promise = require('bluebird');
 var signatureValidation = require('./signatureValidation');
-var reply = require('./reply');
+var replyMessage = require('./replyMessage');
 var bodyFactory = require('./bodyFactory');
 var aiExecuterFactory = require('./aiExecuterFactory');
 var app = express();
@@ -43,7 +43,7 @@ app.post('/callback', function(req, res, next) {
                 analysisResult.then(function(aiResponse) {
                     console.log(aiResponse);
                     var body = bodyFactory.getBody(event.type, aiResponse, event.replyToken);
-                    reply.replyMessage(body);
+                    replyMessage(body);
                 });
                 break;
             default:
