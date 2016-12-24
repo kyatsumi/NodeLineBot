@@ -2,8 +2,6 @@
  * Line Message APIのWebhookを受ける
  */
 
-
-
 /* Heroku環境からAIP.aiアクセストークンを取得 */
 const APIAI_CLIENT_ACCESS_TOKEN = process.env.APIAI_CLIENT_ACCESS_TOKEN;
 
@@ -46,15 +44,15 @@ app.post('/callback', function(req, res, next) {
         if (event.type == 'message' && event.message.text) {
             var aiInstance = apiai(APIAI_CLIENT_ACCESS_TOKEN);
             var aiRequest = aiInstance.textRequest(event.message.text, {sessionId: uuid.v1()});
-            var gotIntent = new Promise(function(resolve, reject){
+            var getIntent = new Promise(function(resolve, reject){
                 aiRequest.on('response', function(response){
                     resolve(response);
                 });
                 aiRequest.end();
             });
-            gotIntent.then(function(apiaiResponse) {
-                console.log(apiaiResponse.result.action);
-                var body = bodyFactory(apiaiResponse.result.action, event.replyToken);
+            getIntent.then(function(aiResponse) {
+                console.log(aiResponse.result.action);
+                var body = bodyFactory(aiResponse.result.action, event.replyToken);
                 reply.replyMessage(body);
             });
         }
