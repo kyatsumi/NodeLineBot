@@ -16,6 +16,7 @@ var uuid = require('node-uuid');
 var Promise = require('bluebird');
 var signatureValidation = require('./signatureValidation');
 var reply = require('./reply');
+var bodyFactory = require('./bodyFactory');
 var app = express();
 
 //ミドルウェア設定
@@ -51,33 +52,10 @@ app.post('/callback', function(req, res, next) {
                 });
                 aiRequest.end();
             });
-            gotIntent.then(function(response) {
-                console.log(response.result.action);
-                switch (response.result.action) {
-                        case 'shopLocation':
-                            var body = {
-                                replyToken : event.replyToken,
-                                messages: [{
-                                    type: 'location',
-                                    title: '架空のお店です',
-                                    address: '名古屋駅のそのへん',
-                                    latitude: '35.170983',
-                                    longitude: '136.882874'
-                                }]
-                            };
-                            reply.replyMessage(body);
-                            break;
-                        default:
-                            var body = {
-                                replyToken : event.replyToken,
-                                messages: [{
-                                    type: 'text',
-                                    text: event.message.text
-                                }]
-                            };
-                            reply.replyMessage(body);
-                            break;
-                }
+            gotIntent.then(function(apiaiResponse) {
+                console.log(apiaiResponse.result.action);
+                var body = bodyFactory(apiaiResponse.result.action, event.replyToken);
+                reply.replyMessage(body);
             });
         }
     }

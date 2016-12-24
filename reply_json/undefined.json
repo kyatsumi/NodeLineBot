@@ -1,0 +1,7 @@
+{
+    "replyToken" : "",
+    "messages": [{
+        "type": "text",
+        "text": "メッセージが不正です"
+    }]
+}
