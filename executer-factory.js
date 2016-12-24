@@ -16,9 +16,11 @@ var uuid = require('node-uuid');
  * 　　みせの場所　　　→　shopLocation
  *     メニュー       →  undefined
  * @param {type} message 
- * @returns {nm$_aiExecuterFactory.module.exports.aiExecuterByMessage.apiaiExecutor|nm$_aiExecuterFactory.module.exports.aiExecuterByMessage.executor} レスポンスとして文字列を返す
+ * @returns {nm$_executer-factory.module.exports.executerByMessage.apiaiExecutor|
+ * nm$_executer-factory.module.exports.executerByMessage.executor} 
+ * AIが識別した文字列を返す,AIを使用しなかった場合はemptyを返す
  */
-module.exports.aiExecuterByMessage = function(message) {
+module.exports.executerByMessage = function(message) {
     switch(message.type) {
         case 'text':
             var aiInstance = apiai(APIAI_CLIENT_ACCESS_TOKEN);

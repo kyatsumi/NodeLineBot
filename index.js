@@ -6,10 +6,10 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var Promise = require('bluebird');
-var signatureValidation = require('./signatureValidation');
-var replyMessage = require('./replyMessage');
-var bodyFactory = require('./bodyFactory');
-var aiExecuterFactory = require('./aiExecuterFactory');
+var signatureValidation = require('./signature-validation');
+var replyMessage = require('./reply-message');
+var bodyFactory = require('./body-factory');
+var executerFactory = require('./executer-factory');
 var app = express();
 
 //ミドルウェア設定
@@ -38,7 +38,7 @@ app.post('/callback', function(req, res, next) {
     for (var event of req.body.events) {
         switch(event.type) {
             case 'message' :
-                var analysisResult = new Promise(aiExecuterFactory.aiExecuterByMessage(event.message));
+                var analysisResult = new Promise(executerFactory.executerByMessage(event.message));
                 analysisResult.then(function(aiResponse) {
                     console.log(aiResponse);
                     var body = bodyFactory.getBody(event.type, aiResponse, event.replyToken);
