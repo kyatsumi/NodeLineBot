@@ -23,7 +23,7 @@ module.exports.getBody = function(type, action, replyToken) {
 };
 
 var messageBody = function(action, replyToken) {
-    var body = JSON.parse(fs.readFileSync('./reply_json/' + action + '.json', 'utf8'));
+    var body = JSON.parse(fs.readFileSync('./reply_json/message/' + action + '.json', 'utf8'));
     body['replyToken'] = replyToken;
     return body;
 };
