@@ -1,7 +1,6 @@
 /* 
- * Line Message APIのWebhookを受ける
+ * Line Message APIのWebhookを受け取る
  */
-
 
 //モジュールのインポート
 var express = require('express');
@@ -27,7 +26,7 @@ var server = app.listen(port, function() {
 
 //ルーターの設定
 app.get('/', function(req, res, next) {
-   res.send('Node is running on port ' + port);
+   res.status(200).end();
 });
 
 app.post('/callback', function(req, res, next) {
@@ -52,4 +51,3 @@ app.post('/callback', function(req, res, next) {
         }
     }
 });
-

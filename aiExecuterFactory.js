@@ -1,6 +1,3 @@
-/*
- * 
- */
 
 /* Heroku環境からAIP.aiアクセストークンを取得 */
 const APIAI_CLIENT_ACCESS_TOKEN = process.env.APIAI_CLIENT_ACCESS_TOKEN;
@@ -11,11 +8,11 @@ var apiai = require('apiai');
 var uuid = require('node-uuid');
 
 /**
- * event.type == 'message'の場合のPromise用のExecuterを生成
+ * Promise用のExecuterを生成
  * message.type == 'text'以外の場合はAIを実行しない
- * Excuter実行後のレスポンスとして文字列を返す
+ * Excuter実行後のレスポンスとしてAIのインテントに登録してある文字列を返す
  * @param {type} message 
- * @returns {nm$_aiExecuterFactory.module.exports.aiExecuterByMessage.apiaiExecutor|nm$_aiExecuterFactory.module.exports.aiExecuterByMessage.executor} 生成されたExecuterはPromiseで使用してもエラーが発生しない
+ * @returns {nm$_aiExecuterFactory.module.exports.aiExecuterByMessage.apiaiExecutor|nm$_aiExecuterFactory.module.exports.aiExecuterByMessage.executor} レスポンスとして文字列を返す
  */
 module.exports.aiExecuterByMessage = function(message) {
     switch(message.type) {
@@ -35,5 +32,4 @@ module.exports.aiExecuterByMessage = function(message) {
             };
             return executor;
     }
-    
 };

@@ -11,8 +11,8 @@ var fs = require('fs');
  * @param {type} replyToken 
  * @returns {Array|Object|messageBody.body|nm$_bodyFactory.messageBody.body|postBackBody.body|nm$_bodyFactory.postBackBody.body} 
  */
-module.exports.getBody = function(type, action, replyToken) {
-    switch(type) {
+module.exports.getBody = function(eventType, action, replyToken) {
+    switch(eventType) {
         case 'message':
             return messageBody(action, replyToken);
         case 'postback':
