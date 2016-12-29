@@ -16,9 +16,8 @@ var luis = require('./luis');
 module.exports.executerByMessage = function(message) {
     switch(message.type) {
         case 'text':
-            luis(message.text);
             var executor = function(resolve, reject) {
-                resolve('undefined');
+                resolve(luis(message.text));
             };
             return executor;
         default:
