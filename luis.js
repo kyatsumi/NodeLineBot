@@ -8,14 +8,14 @@ var options = {
     json: true
 };
 
-module.exports = function(text) {
-    var intent = request.get(options, function (error, response, body) {
+module.exports = function(text, resolve, reject) {
+    request.get(options, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-          return body.topScoringIntent.intent;
+          console.log(body);
+          resolve(body.topScoringIntent.intent);
         } else {
           console.log('error: '+ response.statusCode);
-          return 'undefined';
+          reject(body);
         }
     });
-    return intent;
 };
