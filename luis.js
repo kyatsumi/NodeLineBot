@@ -7,10 +7,10 @@ var luisUrl = 'https://api.projectoxford.ai/luis/v2.0/apps/04873a90-bfb6-4e20-9f
 
 module.exports = function(text) {
     request(luisUrl + text, function (error, response, body) {
-  if (!error && response.statusCode == 200) {
-    console.log(JSON.parse(body));
-  } else {
-    console.log('error: '+ response.statusCode);
-  }
-});
+        if (!error && response.statusCode == 200) {
+          console.log(JSON.parse(body));
+        } else {
+          console.log('error: '+ response.statusCode);
+        }
+    });
 };

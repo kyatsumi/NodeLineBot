@@ -2,7 +2,7 @@
 /* 環境からAIP.aiアクセストークンを取得 */
 const APIAI_CLIENT_ACCESS_TOKEN = process.env.APIAI_CLIENT_ACCESS_TOKEN;
 
-var luis = request('./luis');
+var luis = require('./luis');
 
 /**
  * Promise用のExecuterを生成
