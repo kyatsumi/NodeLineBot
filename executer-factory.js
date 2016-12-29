@@ -18,7 +18,6 @@ module.exports.executerByMessage = function(message) {
         case 'text':
             var executor = function(resolve, reject) {
                 text = luis(message.text);
-                console.log(text);
                 resolve(text);
             };
             return executor;

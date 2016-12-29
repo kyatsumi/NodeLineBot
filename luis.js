@@ -10,7 +10,11 @@ module.exports = function(text) {
         if (!error && response.statusCode == 200) {
           json = JSON.parse(body);
           console.log(json);
-          return json.topScoringIntent.intent;
+          intent = json.topScoringIntent;
+          console.log(intent);
+          ans = intent.intent;
+          console.log(ans);
+          return ans;
         } else {
           console.log('error: '+ response.statusCode);
           return 'undefined';
