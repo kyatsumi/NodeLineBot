@@ -17,8 +17,7 @@ module.exports.executerByMessage = function(message) {
     switch(message.type) {
         case 'text':
             var executor = function(resolve, reject) {
-                text = luis(message.text);
-                resolve(text);
+                luis(message.text, resolve, reject);
             };
             return executor;
         default:
