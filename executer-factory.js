@@ -18,7 +18,7 @@ module.exports.executerByMessage = function(message) {
         case 'text':
             luis(message.text);
             var executor = function(resolve, reject) {
-                resolve('empty');
+                resolve('undefined');
             };
             return executor;
         default:
