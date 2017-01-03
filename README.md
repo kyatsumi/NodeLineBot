@@ -2,7 +2,7 @@ Node.jsを使用してLineMessageAPIを使用する<br>
 動作しているLINEアカウントのQRコード<br>
 http://qr-official.line.me/L/P4j5Z0A10y.png<br>
 <br>
-AIはAPI.aiを使用しています
+AIはLUISを使用しています
 <br>
 executer-factory.jsの中身を変えることで他のAIに変えてもに影響を与えず変更が可能です。<br>
 <br>
