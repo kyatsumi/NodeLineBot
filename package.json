@@ -2,7 +2,7 @@
   "name": "linebot",
   "version": "1.0.0",
   "description": "linebot for Line",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
